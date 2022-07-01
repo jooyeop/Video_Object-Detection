@@ -1,0 +1,39 @@
+<!DOCYTYPE HTML>
+<html>
+  <head>
+    <title>자율주행 영상처리</title>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Nanum+Gothic&family=Stylish&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        /* font-family: "Gamja Flower", cursive; */
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <h1>
+        링크를 입력하세요
+      </h1>
+      <form action="http://localhost:9999/fileUpload" method="POST">
+        <fieldset>
+          <label>URL:</label>
+          <input
+            type="text"
+            name="url"
+            id="url"
+            placeholder="https://example.com"
+            pattern="https://.*"
+            size="30"
+            required
+          />
+          <input type="submit" value="submit" />
+        </fieldset>
+
+      </form>
+    </div>
+  </body>
+</html>
