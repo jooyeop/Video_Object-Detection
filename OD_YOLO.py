@@ -60,14 +60,23 @@ class ObjectDetection:
         x_shape, y_shape = frame.shape[1], frame.shape[0] # 프레임 크기
         for i in range(n): # 객체 수만큼 반복
             row = cord[i] # 좌표
-            if row[4] >= 0.2: # 점수 확률이 0.2 이상인 경우
+            if row[4] >= 0.5: # 점수 확률이 0.2 이상인 경우
                 x1, y1, x2, y2 = int(
                     row[0]*x_shape), int(row[1]*y_shape), int(row[2]*x_shape), int(row[3]*y_shape)
                 bgr = (0, 255, 0) # 색상
+                if self.class_to_label(labels[i]) == 'person':
+                    bgr = (0, 0, 255)
+                if self.class_to_label(labels[i]) == 'car':
+                    bgr = (255, 0, 0)
+                if self.class_to_label(labels[i]) == 'bus':
+                    bgr = (0, 255, 255)
+                if self.class_to_label(labels[i]) == 'truck':
+                    bgr = (255, 255, 0)
+                if self.class_to_label(labels[i]) == 'traffic light':
+                    bgr = (255, 0, 255)
                 cv2.rectangle(frame, (x1, y1), (x2, y2), bgr, 2)
                 cv2.putText(frame, self.class_to_label(labels[i])
-                            + ': ' + str(x1) + ', ' + str(x2) +
-                            ', ' + str(y1) + ', ' + str(y2),
+                            + ':' + str(round(row[4], 2)),
                             (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.9, bgr, 2)
         return frame
 
@@ -94,13 +103,13 @@ class ObjectDetection:
                 break
 
         while True:
-            start_time = time()
-            ret, frame = player.read()
-            if not ret:
+            start_time = time() # 시작 시간
+            ret, frame = player.read() # 프레임 로드
+            if not ret: # 비디오 끝나면 종료
                 break
-            results = self.score_frame(frame)
-            frame = self.plot_boxes(results, frame)
-            end_time = time()
-            fps = 1/np.round(end_time - start_time, 3)
-            print(f"Frames Per Second : {fps}")
-            out.write(frame)
+            results = self.score_frame(frame) # 경계상자와 레이블 플로팅
+            frame = self.plot_boxes(results, frame) # 경계상자와 레이블 플로팅
+            end_time = time() # 종료 시간
+            fps = 1/np.round(end_time - start_time, 3) # 프레임 속도
+            print(f"Frames Per Second : {fps}") # 프레임 속도 출력
+            out.write(frame) # 프레임 저장
