@@ -29,14 +29,14 @@ FLASK ⇒ 딥러닝 기반 영상처리 웹 기능 제작
       → Yolov5는 이미 학습되어있는 모델을 연결하여 객체를 인식해줌
       → Yolov5를 git clone 하여 개인이 직접 커스텀하여 모델을 만들수도 있음
       
-      ```Python3
-          def load_model(self):
-        # YOLOv5 모델 로드
-        model = torch.hub.load('ultralytics/yolov5',
+```Python3
+    def load_model(self):
+  # YOLOv5 모델 로드
+  model = torch.hub.load('ultralytics/yolov5',
                                'yolov5s', pretrained=True)
-        model.classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
-        return model
-      ```
+  model.classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
+  return model
+```
       
     단점
       → Yolov5를 이용하여 이미 학습된 모델을 사용하게 되었을 때 지정된 클래스에서 필요한 객체외에 전혀 관련없는 객체를 라벨링하는 경우가 발생함
