@@ -30,7 +30,7 @@ FLASK ⇒ 딥러닝 기반 영상처리 웹 기능 제작
       → Yolov5를 git clone 하여 개인이 직접 커스텀하여 모델을 만들수도 있음
       
 ```Python3
-    def load_model(self):
+def load_model(self):
   # YOLOv5 모델 로드
   model = torch.hub.load('ultralytics/yolov5',
                                'yolov5s', pretrained=True)
